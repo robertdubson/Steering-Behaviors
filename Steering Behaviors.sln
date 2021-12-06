@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steering Behaviors", "Steer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{4A166DA8-B95D-4B63-BD19-3ADC02E71FE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment", "Experiment\Experiment.csproj", "{13A41C38-01C4-4FED-9D2F-F740F2D4B4C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4A166DA8-B95D-4B63-BD19-3ADC02E71FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A166DA8-B95D-4B63-BD19-3ADC02E71FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A166DA8-B95D-4B63-BD19-3ADC02E71FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13A41C38-01C4-4FED-9D2F-F740F2D4B4C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13A41C38-01C4-4FED-9D2F-F740F2D4B4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13A41C38-01C4-4FED-9D2F-F740F2D4B4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13A41C38-01C4-4FED-9D2F-F740F2D4B4C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
