@@ -35,21 +35,21 @@ namespace Model
         public bool ThereIsWolf() 
         {
 
-            return Actors.Contains(Actors.Find(w => w is Wolf && Vector2.Distance(w.Location, this.Location)<RadiusOfView));
+            return Actors.Contains(Actors.Find(w => (w is Wolf || w is Hunter) && Vector2.Distance(w.Location, this.Location)<RadiusOfView));
         
         }
 
         public bool ThereIsNoWolf() 
         {
             
-            return Actors.Contains(Actors.Find(w => w is Wolf && Vector2.Distance(w.Location, this.Location) < RadiusOfView));
+            return Actors.Contains(Actors.Find(w => (w is Wolf || w is Hunter) && Vector2.Distance(w.Location, this.Location) < RadiusOfView));
 
         }
 
         public Wolf GetDanger() 
         {
 
-            return (Wolf)Actors.Find(w => w is Wolf && Vector2.Distance(w.Location, this.Location) < RadiusOfView);
+            return (Wolf)Actors.Find(w => (w is Wolf || w is Hunter) && Vector2.Distance(w.Location, this.Location) < RadiusOfView);
 
         }
     }

@@ -50,6 +50,7 @@
     <Compile Include="Doe.cs" />
     <Compile Include="GatheringField.cs" />
     <Compile Include="Hare.cs" />
+    <Compile Include="Hunter.cs" />
     <Compile Include="IActor.cs" />
     <Compile Include="IBehavior.cs" />
     <Compile Include="IFlocking.cs" />
