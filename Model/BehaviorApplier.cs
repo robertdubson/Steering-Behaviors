@@ -12,14 +12,21 @@ namespace Model
 
         public SwitchCondition Condition { get; set;}
 
-        public void ApplyBehavior(IActor behaviorPerformer) 
+        public BehaviorApplier(IBehavior behavior, SwitchCondition condition)
         {
+            CurrentBehavior = behavior;
 
-            CurrentBehavior.Move(behaviorPerformer);
+            Condition = condition;
+        }
 
-            if (Condition.Condition) {
+        public void ApplyBehavior() 
+        {
+            
+            CurrentBehavior.Move();
 
-                SwitchCondition newCondition = new SwitchCondition(!(Condition.Condition),CurrentBehavior);
+            if (Condition.Condition.Invoke()) {
+
+                SwitchCondition newCondition = new SwitchCondition(Condition.GetBack, Condition.Condition,CurrentBehavior);
                 
                 CurrentBehavior = Condition.NextBehavior;
 

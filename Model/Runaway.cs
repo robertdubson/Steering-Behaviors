@@ -15,6 +15,8 @@ namespace Model
 
         public IActor Persuer { get; set; }
 
+        public Func<IActor> GetPersuer { get; set; }
+
         public Runaway(IActor runner, IActor persuer)
         {
             Runner = runner;
@@ -22,13 +24,21 @@ namespace Model
             Persuer = persuer;
         }
 
-        public void Move()
+        public Runaway(IActor runner, Func<IActor> getPersuer)
         {
-            float radius = 3;
+            GetPersuer = getPersuer;
+
+            Runner = runner;
+
+        }
+
+
+        public void Move()
+        {            
 
             float maxspeed = Runner.MaxSpeed;
 
-            float maxforce = 0.1f;
+            Persuer = GetPersuer.Invoke();
 
             Vector2 location = new Vector2(Runner.Location.X, Runner.Location.Y);
 

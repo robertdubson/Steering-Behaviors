@@ -8,13 +8,21 @@ namespace Model
 {
     public class SwitchCondition
     {
-        public bool Condition { get; set; }
+        public Func<bool> Condition;
+
+        public Func<bool> GetBack;
+
+        public Func<IBehavior> GetNextBehavior;
 
         public IBehavior NextBehavior { get; set; }
 
-        public SwitchCondition(bool condition, IBehavior behavior)
+        public SwitchCondition(Func<bool> conditionOfChange, Func<bool> condidtionOfReturn, IBehavior behavior)
         {
-            Condition = condition;
+            Condition = conditionOfChange;
+
+            GetBack = condidtionOfReturn;
+
+            //GetNextBehavior = getBehavior;
 
             NextBehavior = behavior;
         }

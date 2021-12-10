@@ -22,6 +22,8 @@ namespace Model
 
         BehaviorApplier Applier { get; set; }
 
+        int RadiusOfView { get; set; }
+
         List<IActor> Actors { get; set; }
     }
 }

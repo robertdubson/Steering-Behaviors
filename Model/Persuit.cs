@@ -14,6 +14,8 @@ namespace Model
 
         public IActor BehaviorPerformer { get; set; }
 
+        public Func<IActor> GetTarget { get; set; }
+
         public Persuit(IActor seeker, IActor target)
         {
             DesiredCreature = target;
@@ -21,8 +23,17 @@ namespace Model
             BehaviorPerformer = seeker;
         }
 
+        public Persuit(IActor seeker, Func<IActor> getTarget)
+        {
+            GetTarget = getTarget;
+
+            BehaviorPerformer = seeker;
+        }
+
         public void Move()
         {
+
+            DesiredCreature = GetTarget.Invoke();
 
             float maxspeed = BehaviorPerformer.MaxSpeed;
 

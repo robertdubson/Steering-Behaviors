@@ -24,8 +24,12 @@ namespace Model
 
         public List<IActor> Actors { get; set; }
 
-        public Actor(int height, int width, float maxspeed)
+        public int RadiusOfView { get; set; }
+
+        public Actor(int height, int width, float maxspeed, int radius)
         {
+            RadiusOfView = radius;
+            
             FieldOfFlow = new GatheringField(height, width);
 
             Acceleration = new Vector2(0, 0);
