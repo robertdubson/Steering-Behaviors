@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace Model
 {
-    public class Hare : IActor
+    public class Hare : Actor
     {
-        public Point Position { get; set; }
-        public float SpeedLimit { get; set; }
+        public Hare(int height, int width, float maxspeed) : base(height, width, maxspeed)
+        {
+            
+        
+        }
     }
 }

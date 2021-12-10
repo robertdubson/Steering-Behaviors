@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace Model
 {
-    public class Wolf : IActor
+    public class Wolf : Actor
     {
-        public Point Position { get; set; }
-        public float SpeedLimit { get; set; }
+        public Wolf(int height, int width, float maxspeed) : base(height, width, maxspeed)
+        {
+
+
+        }
     }
 }
