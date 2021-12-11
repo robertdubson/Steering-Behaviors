@@ -10,6 +10,8 @@ namespace Model
 {
     public interface IActor
     {
+        int ID { get; set; }
+
         Vector2 Acceleration { get; set; }
 
         Vector2 Velocity { get; set; }
@@ -25,5 +27,7 @@ namespace Model
         int RadiusOfView { get; set; }
 
         List<IActor> Actors { get; set; }
+
+        void Update();
     }
 }

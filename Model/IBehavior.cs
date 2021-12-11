@@ -9,6 +9,8 @@ namespace Model
 {
     public interface IBehavior
     {
+        IActor Trigger { get; set; }
+
         void Move();
     }
 }

@@ -10,7 +10,7 @@ namespace Model
 {
     public class Hare : Actor
     {
-        public Hare(int height, int width, float maxspeed=5, int radius=10) : base(height, width, maxspeed, radius)
+        public Hare(int height, int width, List<IActor> actors, float maxspeed=3, int radius=10) : base(height, width, maxspeed, radius, actors)
         {
             Func<bool> condition = IsThereDangerCreature;
 
@@ -18,9 +18,9 @@ namespace Model
 
             Func<IActor> getDanger = GetTheDanger;
 
-            SwitchCondition switchCondition = new SwitchCondition(condition, uncondition, new Runaway(this, getDanger));
+            SwitchCondition switchCondition = new SwitchCondition(condition, uncondition, new Runaway(this, getDanger), getDanger);
 
-            Applier = new BehaviorApplier(new Wandering(this), switchCondition);
+            Applier = new BehaviorApplier(new Wandering(this), switchCondition, this);
         
         }
 

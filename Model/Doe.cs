@@ -14,21 +14,21 @@ namespace Model
         
         public float DesiredSeparation { get; set; }
 
-        public Doe(int height, int width, float maxspeed=15, int radius=40) : base(height, width, maxspeed, radius)
+        public Doe(int height, int width, List<IActor> actors, float maxspeed=1.3f, int radius=10) : base(height, width, maxspeed, radius, actors)
         {
-            NeighbourDistance = 90;
+            NeighbourDistance = 100;
 
-            DesiredSeparation = 20;
+            DesiredSeparation = 5;
             
             Func<bool> condition = ThereIsWolf;
 
             Func<bool> uncondition = ThereIsNoWolf;
 
-            Func<Wolf> getDanger = GetDanger;
+            Func<IActor> getDanger = GetDanger;
 
-            SwitchCondition switchCondition = new SwitchCondition(condition, uncondition, new Runaway(this, getDanger));
+            SwitchCondition switchCondition = new SwitchCondition(condition, uncondition, new Runaway(this, getDanger), getDanger);
 
-            Applier = new BehaviorApplier(new Coupling(this), switchCondition);
+            Applier = new BehaviorApplier(new Coupling(this), switchCondition, this);
 
         }
 
@@ -46,10 +46,10 @@ namespace Model
 
         }
 
-        public Wolf GetDanger() 
+        public IActor GetDanger() 
         {
 
-            return (Wolf)Actors.Find(w => (w is Wolf || w is Hunter) && Vector2.Distance(w.Location, this.Location) < RadiusOfView);
+            return Actors.Find(w => (w is Wolf || w is Hunter) && Vector2.Distance(w.Location, this.Location) < RadiusOfView);
 
         }
     }

@@ -10,6 +10,8 @@ namespace Model
 {
     public class Actor : IActor
     {
+        public int ID { get; set; }
+
         public Vector2 Acceleration { get; set; }
 
         public Vector2 Velocity { get; set; }
@@ -26,8 +28,10 @@ namespace Model
 
         public int RadiusOfView { get; set; }
 
-        public Actor(int height, int width, float maxspeed, int radius)
+        public Actor(int height, int width, float maxspeed, int radius, List<IActor> actors)
         {
+            Actors = actors;
+            
             RadiusOfView = radius;
             
             FieldOfFlow = new GatheringField(height, width);
@@ -47,6 +51,26 @@ namespace Model
             Point location = new Point(r2 * FieldOfFlow.Resolution, r1 * FieldOfFlow.Resolution);
 
             Location = new Vector2((float)location.X, (float)location.Y);
+
+            if (!Actors.Any())
+            {
+
+                ID = 1;
+
+            }
+            else { ID = Actors.Count() + 1;  }
+        }
+
+        public virtual void Update()         
+        {
+
+            Actors.Find(a => a.ID ==ID).Acceleration = this.Acceleration;
+
+            Actors.Find(a => a.ID == ID).Location = this.Location;
+
+            Actors.Find(a => a.ID == ID).Velocity = this.Velocity;
+
+
         }
     }
 }

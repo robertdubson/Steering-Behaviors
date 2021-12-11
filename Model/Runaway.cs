@@ -11,6 +11,8 @@ namespace Model
     public class Runaway : IBehavior
     {
 
+        public IActor Trigger { get; set; }
+
         public IActor Runner { get; set; }
 
         public IActor Persuer { get; set; }
@@ -39,6 +41,12 @@ namespace Model
             float maxspeed = Runner.MaxSpeed;
 
             Persuer = GetPersuer.Invoke();
+
+            if (Persuer==null) {
+
+                Persuer = Trigger;
+
+            }
 
             Vector2 location = new Vector2(Runner.Location.X, Runner.Location.Y);
 

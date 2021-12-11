@@ -12,6 +12,8 @@ namespace Model
     {
         public IActor DesiredCreature { get; set; }
 
+        public IActor Trigger { get; set; }
+
         public IActor BehaviorPerformer { get; set; }
 
         public Func<IActor> GetTarget { get; set; }
@@ -28,12 +30,19 @@ namespace Model
             GetTarget = getTarget;
 
             BehaviorPerformer = seeker;
+
         }
 
         public void Move()
         {
-
             DesiredCreature = GetTarget.Invoke();
+
+            if (DesiredCreature ==null) {
+
+                DesiredCreature = Trigger;
+
+            }
+            
 
             float maxspeed = BehaviorPerformer.MaxSpeed;
 

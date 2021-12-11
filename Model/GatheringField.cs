@@ -161,7 +161,11 @@ namespace Model
 
             column = r1.Next(this.Column - 1);
 
-            return new Vector2((float)FieldArray[row, column].X, (float)FieldArray[row, column].Y);
+            Vector2 finalVector = new Vector2((float)FieldArray[row, column].X, (float)FieldArray[row, column].Y);
+
+
+
+            return finalVector;
 
 
         }

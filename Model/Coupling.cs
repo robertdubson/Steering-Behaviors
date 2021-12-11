@@ -10,15 +10,28 @@ namespace Model
 {
     public class Coupling : IBehavior
     {
+        public IActor Trigger { get; set; }
+        
         public IFlocking Performer { get; set; }
+
+        private IBehavior AddedBehavior { get; set; }
+
+        private List<IFlocking> Mates { get; set; }
 
         public Coupling(IFlocking performer)
         {
             Performer = performer;
+
+            AddedBehavior = new Wandering(performer);
+
+            Mates = new List<IFlocking>();
+
+            Performer.Actors.FindAll(f => f is IFlocking).Cast<IFlocking>().ToList().ForEach(f => Mates.Add(f));
         }
 
         public void Move()
         {
+            AddedBehavior.Move();
             Coh();
             Align();
             Separate();
@@ -32,7 +45,7 @@ namespace Model
 
             int count = 0;
 
-            foreach (IFlocking a in Performer.Actors)
+            foreach (IFlocking a in Mates)
             {
 
                 float dist = Vector2.Distance(Performer.Location, a.Location);
@@ -80,7 +93,7 @@ namespace Model
 
             Vector2 sum = new Vector2();
 
-            foreach (IFlocking a in Performer.Actors)
+            foreach (IFlocking a in Mates)
             {
 
                 float distance = Vector2.Distance(Performer.Location, a.Location);
@@ -128,7 +141,7 @@ namespace Model
 
             int count = 0;
 
-            foreach (IFlocking a in Performer.Actors)
+            foreach (IFlocking a in Mates)
             {
                 if (a != this)
                 {

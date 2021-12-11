@@ -10,37 +10,39 @@ namespace Model
 {
     public class Wolf : Actor
     {
-        public Wolf(int height, int width, float maxspeed=4, int radius=30) : base(height, width, maxspeed, radius)
-        {
+        public int Satiety { get; set; }
 
+        public Wolf(int height, int width, List<IActor> actors, float maxspeed=1.35f, int radius=30) : base(height, width, maxspeed, radius, actors)
+        {
+            Satiety = 100;
 
             Func<bool> findHare = SearchForClosestHare;
 
             Func<bool> stopSearchHare = UnfindHare;
 
-            Func<IActor> getHare = DetermineTheHare;
+            Func<IActor> getHare = DetermineTheVictim;
             
-            SwitchCondition condition = new SwitchCondition(findHare, stopSearchHare, new Persuit(this, getHare));
+            SwitchCondition condition = new SwitchCondition(findHare, stopSearchHare, new Persuit(this, getHare), getHare);
             
-            Applier = new BehaviorApplier(new Wandering(this), condition);
+            Applier = new BehaviorApplier(new Wandering(this), condition, this);
 
         }
 
         private bool UnfindHare() {
 
-            return !Actors.Contains(Actors.Find(h => (h is Hare) && (Vector2.Distance(this.Location, h.Location) < RadiusOfView)));
+            return !Actors.Contains(Actors.Find(h => ((h is Hare) || (h is Doe)) && (Vector2.Distance(this.Location, h.Location) < RadiusOfView)));
 
         }
 
         private bool SearchForClosestHare() {
 
-            return Actors.Contains(Actors.Find(h => (h is Hare) && (Vector2.Distance(this.Location, h.Location) < RadiusOfView)));
+            return Actors.Contains(Actors.Find(h => ((h is Hare) || (h is Doe)) && (Vector2.Distance(this.Location, h.Location) < RadiusOfView)));
 
         }
 
-        private Hare DetermineTheHare() {
+        private IActor DetermineTheVictim() {
 
-            return (Hare)Actors.Find(h => (h is Hare) && (Vector2.Distance(this.Location, h.Location) < RadiusOfView));
+            return Actors.Find(h => ((h is Hare) || (h is Doe)) && (Vector2.Distance(this.Location, h.Location) < RadiusOfView));
 
         }
     }

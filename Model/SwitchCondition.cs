@@ -14,13 +14,17 @@ namespace Model
 
         public Func<IBehavior> GetNextBehavior;
 
+        public Func<IActor> GetTrigger;
+
         public IBehavior NextBehavior { get; set; }
 
-        public SwitchCondition(Func<bool> conditionOfChange, Func<bool> condidtionOfReturn, IBehavior behavior)
+        public SwitchCondition(Func<bool> conditionOfChange, Func<bool> condidtionOfReturn, IBehavior behavior, Func<IActor> getTrigger)
         {
             Condition = conditionOfChange;
 
             GetBack = condidtionOfReturn;
+
+            GetTrigger = getTrigger;
 
             //GetNextBehavior = getBehavior;
 

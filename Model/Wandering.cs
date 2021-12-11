@@ -10,6 +10,9 @@ namespace Model
 {
     public class Wandering : IBehavior
     {
+
+        public IActor Trigger { get; set; }
+
         public IActor Wanderer { get; set; }
 
         public Wandering(IActor wanderer)
