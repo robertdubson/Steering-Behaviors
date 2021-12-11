@@ -68,7 +68,72 @@ namespace Model
 
             BehaviorPerformer.Location = location;
 
+            Limit(BehaviorPerformer);
+
             BehaviorPerformer.Acceleration = BehaviorPerformer.Acceleration * 0;
         }
+
+        public void ApplyLimitations()
+        {
+
+            while (BehaviorPerformer.Location.X < 70)
+            {
+
+                BehaviorPerformer.Location = new Vector2(BehaviorPerformer.Location.X + 1, BehaviorPerformer.Location.Y);
+
+            }
+            while (BehaviorPerformer.Location.Y > 681)
+            {
+
+                BehaviorPerformer.Location = new Vector2(BehaviorPerformer.Location.X, BehaviorPerformer.Location.Y - 1);
+
+            }
+            while (BehaviorPerformer.Location.X > 1289)
+            {
+
+                BehaviorPerformer.Location = new Vector2(BehaviorPerformer.Location.X - 1, BehaviorPerformer.Location.Y);
+
+            }
+            while (BehaviorPerformer.Location.Y < 65)
+            {
+
+                BehaviorPerformer.Location = new Vector2(BehaviorPerformer.Location.X, BehaviorPerformer.Location.Y + 1);
+
+            }
+
+        }
+
+        public void Limit(IActor whoToLimit)
+        {
+
+            while (whoToLimit.Location.X < 70)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X + 1, whoToLimit.Location.Y);
+
+            }
+            while (whoToLimit.Location.Y > 681)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X, whoToLimit.Location.Y - 5);
+
+            }
+            while (whoToLimit.Location.X > 1989)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X - 1, whoToLimit.Location.Y);
+
+            }
+            while (whoToLimit.Location.Y < 65)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X, whoToLimit.Location.Y + 5);
+
+            }
+
+
+        }
+
+
     }
 }

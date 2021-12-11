@@ -28,6 +28,12 @@ namespace Game
         {
             InitializeComponent();
 
+            KeyPreview = true;
+
+            KeyDown += Game_KeyDown;
+
+            Click += Game_Click;
+
             spritesToActors = new Dictionary<Button, IActor>();
 
             actorsToSprites = new Dictionary<IActor, Button>();
@@ -104,13 +110,15 @@ namespace Game
                 }
                 else if (a is Hare) 
                 {
-                    sprite.Height = 25;
+                    sprite.Height = 20;
 
                     sprite.Width = sprite.Height;
 
                     sprite.BackColor = Color.Gray;
 
                 }
+
+                a.Actors = actors;
 
                 GraphicsPath p = new GraphicsPath();
                 
@@ -128,6 +136,51 @@ namespace Game
 
         }
 
+
+
+        private void Game_KeyDown(object sender, KeyEventArgs e)
+        {
+            int walkDistance = 5;
+
+            switch (e.KeyCode) {
+
+                case Keys.W:
+                    _hunter.Top -= walkDistance;
+                    break;
+                case Keys.Up:
+                    _hunter.Top -= walkDistance;
+                    break;
+                case Keys.Down:
+                    _hunter.Top += walkDistance;
+                    break;
+                case Keys.S:
+                    _hunter.Top += walkDistance;
+                    break;
+                case Keys.D:
+                    _hunter.Left += walkDistance;
+                    break;
+                case Keys.Right:
+                    _hunter.Left += walkDistance;
+                    break;
+                case Keys.Left:
+                    _hunter.Left -= walkDistance;
+                    break;
+                case Keys.A:
+                    _hunter.Left -= walkDistance;
+                    break;
+
+
+
+            
+            }
+                
+        }
+
+        private void Game_Click(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
         private void GameLoop() 
         {
             foreach (IActor a in actors) 
@@ -140,12 +193,16 @@ namespace Game
                 }
                 else {
 
+                    a.Location = new System.Numerics.Vector2(_hunter.Location.X, _hunter.Location.Y);
+
                     a.Update();
 
                 }
                 
             }
         }
+
+
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {

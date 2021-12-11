@@ -70,8 +70,71 @@ namespace Model
 
             Runner.Location = location;
 
+            Limit(Runner);
+
             Runner.Acceleration = Runner.Acceleration * 0;
 
         }
+
+        public void ApplyLimitations()
+        {
+
+            while (Runner.Location.X < 70)
+            {
+
+                Runner.Location = new Vector2(Runner.Location.X + 1, Runner.Location.Y);
+
+            }
+            while (Runner.Location.Y > 681)
+            {
+
+                Runner.Location = new Vector2(Runner.Location.X, Runner.Location.Y - 5);
+
+            }
+            while (Runner.Location.X > 1289)
+            {
+
+                Runner.Location = new Vector2(Runner.Location.X - 1, Runner.Location.Y);
+
+            }
+            while (Runner.Location.Y < 65)
+            {
+
+                Runner.Location = new Vector2(Runner.Location.X, Runner.Location.Y + 5);
+
+            }
+
+        }
+
+        public void Limit(IActor whoToLimit) {
+
+            while (whoToLimit.Location.X < 70)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X + 1, whoToLimit.Location.Y);
+
+            }
+            while (whoToLimit.Location.Y > 681)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X, whoToLimit.Location.Y - 1);
+
+            }
+            while (whoToLimit.Location.X > 1989)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X - 1, whoToLimit.Location.Y);
+
+            }
+            while (whoToLimit.Location.Y < 65)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X, whoToLimit.Location.Y + 1);
+
+            }
+
+
+        }
+
     }
 }

@@ -54,6 +54,7 @@
     <Compile Include="IActor.cs" />
     <Compile Include="IBehavior.cs" />
     <Compile Include="IFlocking.cs" />
+    <Compile Include="MultipleConditionBehaviorApplier.cs" />
     <Compile Include="Persuit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runaway.cs" />

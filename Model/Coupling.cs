@@ -35,6 +35,7 @@ namespace Model
             Coh();
             Align();
             Separate();
+            Limit(Performer);
         }
 
         public void Coh() 
@@ -176,6 +177,67 @@ namespace Model
                 Performer.Location = Performer.Location + Performer.Velocity;
 
                 Performer.Acceleration = Performer.Acceleration * 0;
+            }
+
+
+        }
+
+        public void ApplyLimitations()
+        {
+
+            while (Performer.Location.X < 70)
+            {
+
+                Performer.Location = new Vector2(Performer.Location.X + 1, Performer.Location.Y);
+
+            }
+            while (Performer.Location.Y > 681)
+            {
+
+                Performer.Location = new Vector2(Performer.Location.X, Performer.Location.Y - 5);
+
+            }
+            while (Performer.Location.X > 1289)
+            {
+
+                Performer.Location = new Vector2(Performer.Location.X - 1, Performer.Location.Y);
+
+            }
+            while (Performer.Location.Y < 65)
+            {
+
+                Performer.Location = new Vector2(Performer.Location.X, Performer.Location.Y + 5);
+
+            }
+
+        }
+
+        public void Limit(IActor whoToLimit)
+        {
+
+            while (whoToLimit.Location.X < 70)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X + 1, whoToLimit.Location.Y);
+
+            }
+            while (whoToLimit.Location.Y > 681)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X, whoToLimit.Location.Y - 1);
+
+            }
+            while (whoToLimit.Location.X > 1989)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X - 1, whoToLimit.Location.Y);
+
+            }
+            while (whoToLimit.Location.Y < 65)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X, whoToLimit.Location.Y + 1);
+
             }
 
 

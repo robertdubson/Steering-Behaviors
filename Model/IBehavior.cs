@@ -9,7 +9,9 @@ namespace Model
 {
     public interface IBehavior
     {
-        IActor Trigger { get; set; }
+        IActor Trigger { get; set; }        
+
+        void Limit(IActor whoToLimit);
 
         void Move();
     }

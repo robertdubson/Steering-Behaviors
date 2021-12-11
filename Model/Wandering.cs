@@ -42,7 +42,70 @@ namespace Model
 
             Wanderer.Location = location;
 
+            Limit(Wanderer);
+
             Wanderer.Acceleration = Wanderer.Acceleration * 0;
         }
+
+        public void ApplyLimitations() {
+
+            while (Wanderer.Location.X < 70)
+            {
+
+                Wanderer.Location = new Vector2(Wanderer.Location.X + 1, Wanderer.Location.Y); 
+
+            }
+            while (Wanderer.Location.Y > 681)
+            {
+
+                Wanderer.Location = new Vector2(Wanderer.Location.X, Wanderer.Location.Y-5);
+
+            }
+            while (Wanderer.Location.X > 1289)
+            {
+
+                Wanderer.Location = new Vector2(Wanderer.Location.X - 1, Wanderer.Location.Y);
+
+            }
+            while (Wanderer.Location.Y < 65)
+            {
+
+                Wanderer.Location = new Vector2(Wanderer.Location.X, Wanderer.Location.Y + 5);
+
+            }
+
+        }
+
+        public void Limit(IActor whoToLimit)
+        {
+
+            while (whoToLimit.Location.X < 70)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X + 1, whoToLimit.Location.Y);
+
+            }
+            while (whoToLimit.Location.Y > 681)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X, whoToLimit.Location.Y - 1);
+
+            }
+            while (whoToLimit.Location.X > 1989)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X - 1, whoToLimit.Location.Y);
+
+            }
+            while (whoToLimit.Location.Y < 65)
+            {
+
+                whoToLimit.Location = new Vector2(whoToLimit.Location.X, whoToLimit.Location.Y + 1);
+
+            }
+
+
+        }
+
     }
 }
