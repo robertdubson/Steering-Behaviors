@@ -209,9 +209,9 @@
             this.label5.Font = new System.Drawing.Font("Modern No. 20", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(11, 210);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(317, 15);
+            this.label5.Size = new System.Drawing.Size(311, 15);
             this.label5.TabIndex = 14;
-            this.label5.Text = "Bear in mind that the power of your shoot depends on the ";
+            this.label5.Text = "Bear in mind that the power of your shot depends on the ";
             // 
             // label6
             // 
