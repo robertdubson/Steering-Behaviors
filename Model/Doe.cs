@@ -14,11 +14,11 @@ namespace Model
         
         public float DesiredSeparation { get; set; }
 
-        public Doe(int height, int width, List<IActor> actors, float maxspeed=1.8f, int radius=180) : base(height, width, maxspeed, radius, actors)
+        public Doe(int height, int width, List<IActor> actors, float maxspeed=1.8f, int radius=250) : base(height, width, maxspeed, radius, actors)
         {
-            NeighbourDistance = 90;
+            NeighbourDistance = 150;
 
-            DesiredSeparation = 20;
+            DesiredSeparation = 150;
             
             Func<bool> condition = ThereIsWolf;
 

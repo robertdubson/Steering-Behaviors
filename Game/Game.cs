@@ -15,6 +15,8 @@ namespace Game
 {
     public partial class Game : Form
     {
+        Form parentForm;
+        
         List<Button> _sprites;
 
         List<IActor> actors;
@@ -30,6 +32,145 @@ namespace Game
         List<IActor> killed;
 
         List<Bullet> bullets;
+
+        public Game(int hares, int wolves, int does, Form parent)
+        {
+            InitializeComponent();
+
+            parentForm = parent;
+
+            FormClosed += Game_FormClosed;
+
+            killed = new List<IActor>();
+
+            BackColor = Color.DarkGreen;
+
+            KeyPreview = true;
+
+            KeyDown += Game_KeyDown;
+
+            Click += Game_Click;
+
+            spritesToActors = new Dictionary<Button, IActor>();
+
+            actorsToSprites = new Dictionary<IActor, Button>();
+
+            _sprites = new List<Button>();
+
+            actors = new List<IActor>();
+
+
+            actors.Add(new Doe(this.Height, this.Width, actors));
+
+            for (int i =0; i<=hares; i++) 
+            {
+                actors.Add(new Hare(this.Height, this.Width, actors));
+            }
+            for (int i = 0; i <= does; i++)
+            {
+                actors.Add(new Doe(this.Height, this.Width, actors));
+            }
+            for (int i = 0; i <= wolves; i++)
+            {
+                actors.Add(new Wolf(this.Height, this.Width, actors));
+            }
+
+
+            Hunter hunter = new Hunter(actors);
+
+            hunter.Location = new System.Numerics.Vector2(50, 50);
+
+            _player = hunter;
+
+            labelBullets.Text = "BULLETS: " + _player.BulletCounter;
+
+            actors.Add(hunter);
+
+            foreach (IActor a in actors)
+            {
+                Button sprite = new Button();
+
+                sprite.Location = new Point((int)a.Location.X, (int)a.Location.Y);
+
+                sprite.Enabled = false;
+
+                if (a is Hunter)
+                {
+                    sprite.Height = 50;
+
+                    sprite.Width = sprite.Height;
+
+                    sprite.BackColor = Color.Red;
+
+                    _hunter = sprite;
+
+                }
+                else if (a is Doe)
+                {
+
+                    sprite.Height = 30;
+
+                    sprite.Width = sprite.Height;
+
+                    sprite.BackColor = Color.Brown;
+
+                    sprite.Tag = "Doe";
+
+                }
+                else if (a is Wolf)
+                {
+                    sprite.Height = 33;
+
+                    sprite.Width = sprite.Height;
+
+                    sprite.BackColor = Color.Black;
+
+                    sprite.Tag = "Wolf";
+
+                }
+                else if (a is Hare)
+                {
+                    sprite.Height = 30;
+
+                    sprite.Width = sprite.Height;
+
+                    sprite.BackColor = Color.Pink;
+
+                    sprite.Tag = "Hare";
+
+                }
+
+                a.Actors = actors;
+
+                GraphicsPath p = new GraphicsPath();
+
+                p.AddEllipse(1, 1, sprite.Width - 4, sprite.Height - 4);
+
+                sprite.Region = new Region(p);
+
+                actorsToSprites.Add(a, sprite);
+
+                spritesToActors.Add(sprite, a);
+
+                Controls.Add(sprite);
+
+                foreach (Control c in Controls)
+                {
+
+                    c.BringToFront();
+
+                }
+
+                bullets = new List<Bullet>();
+
+            }
+
+        }
+
+        private void Game_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            parentForm.Show();
+        }
 
         public Game()
         {
@@ -91,6 +232,8 @@ namespace Game
             hunter.Location = new System.Numerics.Vector2(50, 50);
 
             _player = hunter;
+
+            labelBullets.Text = "BULLETS: " + _player.BulletCounter;
 
             actors.Add(hunter);
 
@@ -178,7 +321,7 @@ namespace Game
 
         private void Game_KeyDown(object sender, KeyEventArgs e)
         {
-            int walkDistance = 5;
+            int walkDistance = 3;
 
             switch (e.KeyCode) {
 
@@ -206,10 +349,18 @@ namespace Game
                 case Keys.A:
                     _hunter.Left -= walkDistance;
                     break;
+           
+            }
+            spritesToActors[_hunter].Update();
 
+            actors.Find( h => h.ID ==spritesToActors[_hunter].ID).Update();
 
+            List<IActor> currentActors = actors;
 
-
+            foreach (IActor a in actors) 
+            {
+                a.Actors = currentActors;
+                
             }
 
         }
@@ -229,6 +380,8 @@ namespace Game
                 bullets.Add(bullet);
 
                 _player.BulletCounter--;
+
+                labelBullets.Text = "BULLETS: " + _player.BulletCounter;
 
             }
    
@@ -308,6 +461,7 @@ namespace Game
         {
             GameLoop();
         }
+
     }
 
     public class Bullet
