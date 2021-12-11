@@ -53,24 +53,38 @@ namespace Game
 
             actors = new List<IActor>();
 
+            
+
+            actors.Add(new Doe(this.Height, this.Width, actors));
+
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+            actors.Add(new Doe(this.Height, this.Width, actors));
+
+
+            actors.Add(new Hare(this.Height, this.Width, actors));
+            actors.Add(new Hare(this.Height, this.Width, actors));
+            actors.Add(new Hare(this.Height, this.Width, actors));
+           
+
+            
+
             actors.Add(new Wolf(this.Height, this.Width, actors));
 
             actors.Add(new Wolf(this.Height, this.Width, actors));
 
             actors.Add(new Wolf(this.Height, this.Width, actors));
 
-            actors.Add(new Doe(this.Height, this.Width, actors));
-
-            actors.Add(new Doe(this.Height, this.Width, actors));
-            actors.Add(new Doe(this.Height, this.Width, actors));
-            actors.Add(new Doe(this.Height, this.Width, actors));
-            actors.Add(new Doe(this.Height, this.Width, actors));
-
-
-            actors.Add(new Hare(this.Height, this.Width, actors));
-            actors.Add(new Hare(this.Height, this.Width, actors));
-            actors.Add(new Hare(this.Height, this.Width, actors));
-            actors.Add(new Hare(this.Height, this.Width, actors));
 
             Hunter hunter = new Hunter(actors);
 
@@ -108,6 +122,8 @@ namespace Game
 
                     sprite.BackColor = Color.Brown;
 
+                    sprite.Tag = "Doe";
+
                 }
                 else if (a is Wolf)
                 {
@@ -115,7 +131,9 @@ namespace Game
 
                     sprite.Width = sprite.Height;
 
-                    sprite.BackColor = Color.DarkGray;
+                    sprite.BackColor = Color.Black;
+
+                    sprite.Tag = "Wolf";
 
                 }
                 else if (a is Hare)
@@ -125,6 +143,8 @@ namespace Game
                     sprite.Width = sprite.Height;
 
                     sprite.BackColor = Color.Pink;
+
+                    sprite.Tag = "Hare";
 
                 }
 
@@ -141,6 +161,12 @@ namespace Game
                 spritesToActors.Add(sprite, a);
 
                 Controls.Add(sprite);
+
+                foreach (Control c in Controls) {
+
+                    c.BringToFront();
+                
+                }
 
                 bullets = new List<Bullet>();
 
@@ -230,6 +256,7 @@ namespace Game
                         curBullet.BulletSprite.Dispose();
 
                     }
+                    
 
                 }
                 else {
@@ -245,6 +272,27 @@ namespace Game
 
                 b.FlyToTheTarget();
 
+            }
+
+            foreach (Control c in Controls) 
+            {
+                if (c.Tag=="Wolf") {
+
+                    foreach (Control p in Controls) {
+
+                        if (((p.Tag=="Hare")||(p.Tag=="Doe")) && (c.Bounds.IntersectsWith(p.Bounds)))                         
+                        {
+
+                            p.Dispose();
+                            killed.Add(spritesToActors[(Button)p]);
+                        
+                        }
+
+
+                    }
+
+                }
+                
             }
 
             foreach (IActor a in killed)             
@@ -312,7 +360,7 @@ namespace Game
 
             {
 
-                float maxspeed = 5;
+                float maxspeed = 6;
 
                 Vector2 location = Location;
 

@@ -12,7 +12,7 @@ namespace Model
     {
         public int Satiety { get; set; }
 
-        public Wolf(int height, int width, List<IActor> actors, float maxspeed=1.35f, int radius=40) : base(height, width, maxspeed, radius, actors)
+        public Wolf(int height, int width, List<IActor> actors, float maxspeed=1.35f, int radius=120) : base(height, width, maxspeed, radius, actors)
         {
             Satiety = 100;
 

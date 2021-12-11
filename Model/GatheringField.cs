@@ -19,7 +19,7 @@ namespace Model
 
         public GatheringField(int height, int width)
         {
-            Resolution = 10;
+            Resolution = 30;
 
             int row = height / Resolution;
 

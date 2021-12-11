@@ -23,7 +23,7 @@ namespace Model
 
         public Hunter(List<IActor> actors)
         {
-            BulletCounter = 10;
+            BulletCounter = 20;
 
             Actors = actors;
 

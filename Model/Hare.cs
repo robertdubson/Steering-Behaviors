@@ -10,7 +10,7 @@ namespace Model
 {
     public class Hare : Actor
     {
-        public Hare(int height, int width, List<IActor> actors, float maxspeed=1.4f, int radius=10) : base(height, width, maxspeed, radius, actors)
+        public Hare(int height, int width, List<IActor> actors, float maxspeed=2f, int radius=150) : base(height, width, maxspeed, radius, actors)
         {
             Func<bool> condition = IsThereDangerCreature;
 
@@ -27,21 +27,21 @@ namespace Model
         public bool IsThereDangerCreature() 
         {
 
-            return Actors.Contains(Actors.Find(h => Vector2.Distance(this.Location, h.Location)<RadiusOfView));
+            return Actors.Contains(Actors.Find(h => Vector2.Distance(this.Location, h.Location)<RadiusOfView && 0<(Vector2.Distance(this.Location, h.Location))));
         
         }
 
         public bool ThereIsNoDanger() 
         {
 
-            return !Actors.Contains(Actors.Find(h => Vector2.Distance(this.Location, h.Location) < RadiusOfView));
+            return !Actors.Contains(Actors.Find(h => Vector2.Distance(this.Location, h.Location) < RadiusOfView && 0 < (Vector2.Distance(this.Location, h.Location))));
 
         }
 
         public IActor GetTheDanger() 
         {
 
-            return Actors.Find(h => Vector2.Distance(this.Location, h.Location) < RadiusOfView);
+            return Actors.Find(h => Vector2.Distance(this.Location, h.Location) < RadiusOfView && 0 < (Vector2.Distance(this.Location, h.Location)));
 
 
         }
