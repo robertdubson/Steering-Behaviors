@@ -10,7 +10,7 @@ namespace Model
 {
     public class Hare : Actor
     {
-        public Hare(int height, int width, List<IActor> actors, float maxspeed=3, int radius=45) : base(height, width, maxspeed, radius, actors)
+        public Hare(int height, int width, List<IActor> actors, float maxspeed=1.4f, int radius=10) : base(height, width, maxspeed, radius, actors)
         {
             Func<bool> condition = IsThereDangerCreature;
 

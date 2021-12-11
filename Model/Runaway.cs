@@ -120,7 +120,7 @@ namespace Model
                 whoToLimit.Location = new Vector2(whoToLimit.Location.X, whoToLimit.Location.Y - 1);
 
             }
-            while (whoToLimit.Location.X > 1989)
+            while (whoToLimit.Location.X > 1289)
             {
 
                 whoToLimit.Location = new Vector2(whoToLimit.Location.X - 1, whoToLimit.Location.Y);

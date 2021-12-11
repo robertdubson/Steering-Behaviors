@@ -19,8 +19,12 @@ namespace Model
         public int RadiusOfView { get  ; set ; }
         public List<IActor> Actors { get ; set ; }
 
+        public int BulletCounter { get; set; }
+
         public Hunter(List<IActor> actors)
         {
+            BulletCounter = 10;
+
             Actors = actors;
 
             if (!Actors.Any())
